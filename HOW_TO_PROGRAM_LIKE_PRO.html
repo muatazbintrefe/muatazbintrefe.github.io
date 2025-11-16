@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Programming Basics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        /* Main Content */
+        .main-content {
+            background: white;
+            margin: 30px auto;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.8rem;
+            line-height: 1.3;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 50px 0 25px 0;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin: 30px 0 15px 0;
+            font-size: 1.4rem;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: #1e272e;
+            color: #f7f7f7;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            border: 1px solid #34495e;
+        }
+        
+        .code-line {
+            margin-bottom: 12px;
+            display: block;
+            padding: 2px 0;
+        }
+        
+        .code-comment {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .code-keyword {
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .code-string {
+            color: #2ecc71;
+        }
+        
+        .code-number {
+            color: #e74c3c;
+        }
+        
+        /* Steps and Sections */
+        .step {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .code-section {
+            margin: 35px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #3498db;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 40px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .back-button:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        .note {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #fdcb6e;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            font-size: 1.1rem;
+        }
+        
+        .output-section {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Spacing utilities */
+        .spacer {
+            height: 30px;
+        }
+        
+        .small-spacer {
+            height: 15px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .main-content {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .code-block {
+                padding: 20px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">C++ Programming Guide</div>
+                <nav>
+                    <ul>
+                        <li><a href="muatazwww.html">Home</a></li>
+                        <li><a href="muatazwww.html#projects">Projects</a></li>
+                        <li><a href="muatazwww.html#about">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <h1>C++ Programming Basics</h1>
+            <p>Learn C++ programming from basic includes to object-oriented programming with classes. This guide will walk you through creating a complete Car class with practical examples.</p>
+            
+            <div class="spacer"></div>
+
+            <h2>Complete C++ Example: Car Class</h2>
+            
+            <div class="code-section">
+                <h3>Full Program Code</h3>
+                <div class="code-block">
+<span class="code-line"><span class="code-comment">// Include necessary libraries</span></span>
+<span class="code-line"><span class="code-keyword">#include</span> <span class="code-string">&lt;iostream&gt;</span></span>
+<span class="code-line"><span class="code-keyword">#include</span> <span class="code-string">&lt;string&gt;</span></span>
+<span class="code-line"><span class="code-keyword">using namespace</span> std;</span>
+<br>
+<span class="code-line"><span class="code-comment">// Define the Car class</span></span>
+<span class="code-line"><span class="code-keyword">class</span> Car {</span>
+<span class="code-line"><span class="code-keyword">private</span>:</span>
+<span class="code-line">    string brand;</span>
+<span class="code-line">    string model;</span>
+<span class="code-line">    <span class="code-keyword">int</span> year;</span>
+<span class="code-line">    <span class="code-keyword">double</span> speed;</span>
+<br>
+<span class="code-line"><span class="code-keyword">public</span>:</span>
+<span class="code-line">    <span class="code-comment">// Constructor</span></span>
+<span class="code-line">    Car(string b, string m, <span class="code-keyword">int</span> y) {</span>
+<span class="code-line">        brand = b;</span>
+<span class="code-line">        model = m;</span>
+<span class="code-line">        year = y;</span>
+<span class="code-line">        speed = <span class="code-number">0</span>;</span>
+<span class="code-line">    }</span>
+<br>
+<span class="code-line">    <span class="code-comment">// Method to increase speed</span></span>
+<span class="code-line">    <span class="code-keyword">void</span> accelerate() {</span>
+<span class="code-line">        speed += <span class="code-number">10</span>;</span>
+<span class="code-line">        cout << brand << <span class="code-string">" "</span> << model << <span class="code-string">" is accelerating. Speed: "</span> << speed << <span class="code-string">" km/h"</span> << endl;</span>
+<span class="code-line">    }</span>
+<br>
+<span class="code-line">    <span class="code-comment">// Method to decrease speed</span></span>
+<span class="code-line">    <span class="code-keyword">void</span> brake() {</span>
+<span class="code-line">        <span class="code-keyword">if</span> (speed > <span class="code-number">0</span>) {</span>
+<span class="code-line">            speed -= <span class="code-number">10</span>;</span>
+<span class="code-line">            cout << <span class="code-string">"Braking... Speed: "</span> << speed << <span class="code-string">" km/h"</span> << endl;</span>
+<span class="code-line">        }</span>
+<span class="code-line">    }</span>
+<br>
+<span class="code-line">    <span class="code-comment">// Method to display car information</span></span>
+<span class="code-line">    <span class="code-keyword">void</span> displayInfo() {</span>
+<span class="code-line">        cout << year << <span class="code-string">" "</span> << brand << <span class="code-string">" "</span> << model << endl;</span>
+<span class="code-line">        cout << <span class="code-string">"Current speed: "</span> << speed << <span class="code-string">" km/h"</span> << endl;</span>
+<span class="code-line">    }</span>
+<span class="code-line">};</span>
+<br>
+<span class="code-line"><span class="code-comment">// Main function - program entry point</span></span>
+<span class="code-line"><span class="code-keyword">int</span> main() {</span>
+<span class="code-line">    <span class="code-comment">// Create car objects</span></span>
+<span class="code-line">    Car myCar(<span class="code-string">"Toyota"</span>, <span class="code-string">"Camry"</span>, <span class="code-number">2023</span>);</span>
+<span class="code-line">    Car sportsCar(<span class="code-string">"Ford"</span>, <span class="code-string">"Mustang"</span>, <span class="code-number">2024</span>);</span>
+<br>
+<span class="code-line">    <span class="code-comment">// Use the objects</span></span>
+<span class="code-line">    myCar.displayInfo();</span>
+<span class="code-line">    myCar.accelerate();</span>
+<span class="code-line">    myCar.accelerate();</span>
+<span class="code-line">    myCar.brake();</span>
+<br>
+<span class="code-line">    cout << <span class="code-string">"\n"</span>;</span>
+<br>
+<span class="code-line">    sportsCar.displayInfo();</span>
+<span class="code-line">    sportsCar.accelerate();</span>
+<br>
+<span class="code-line">    <span class="code-keyword">return</span> <span class="code-number">0</span>;</span>
+<span class="code-line">}</span>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>Code Explanation</h3>
+                <div class="small-spacer"></div>
+                <p><strong>Lines 1-3:</strong> Include necessary libraries and use standard namespace</p>
+                <p><strong>Lines 5-10:</strong> Define the Car class with private member variables</p>
+                <p><strong>Lines 12-18:</strong> Constructor that initializes the car object</p>
+                <p><strong>Lines 20-24:</strong> accelerate() method increases speed by 10</p>
+                <p><strong>Lines 26-32:</strong> brake() method decreases speed by 10</p>
+                <p><strong>Lines 34-38:</strong> displayInfo() method shows car details</p>
+                <p><strong>Lines 41-55:</strong> main() function creates objects and tests methods</p>
+            </div>
+
+            <div class="step">
+                <h3>Expected Output</h3>
+                <div class="output-section">
+<span class="code-line">2023 Toyota Camry</span>
+<span class="code-line">Current speed: 0 km/h</span>
+<span class="code-line">Toyota Camry is accelerating. Speed: 10 km/h</span>
+<span class="code-line">Toyota Camry is accelerating. Speed: 20 km/h</span>
+<span class="code-line">Braking... Speed: 10 km/h</span>
+<br>
+<span class="code-line">2024 Ford Mustang</span>
+<span class="code-line">Current speed: 0 km/h</span>
+<span class="code-line">Ford Mustang is accelerating. Speed: 10 km/h</span>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Important Note:</strong> I fixed a bug in your original code!<br>
+                Line 16 had: <code>brand - b;</code> (wrong - using subtraction instead of assignment)<br>
+                Changed to: <code>brand = b;</code> (correct - using assignment operator)
+            </div>
+
+            <div class="center">
+                <a href="muatazwww.html" class="back-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 11H7.14l3.63-4.36a1 1 0 1 0-1.54-1.28l-5 6a1.19 1.19 0 0 0-.09.15c0 .05 0 .08-.07.13A1 1 0 0 0 4 12a1 1 0 0 0 .07.36c0 .05 0 .08.07.13a1.19 1.19 0 0 0 .09.15l5 6A1 1 0 0 0 10 19a1 1 0 0 0 .64-.23 1 1 0 0 0 .13-1.41L7.14 13H19a1 1 0 0 0 0-2z"/>
+                    </svg>
+                    Back to home
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
